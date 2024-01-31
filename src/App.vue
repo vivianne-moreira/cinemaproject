@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="body">
     <HeaderApp />
     <FooterApp />
     <router-view></router-view>
@@ -20,5 +20,10 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos específicos para o componente App */
+.body {
+  background-color: black;
+}
+*{
+  color:#09b38b;
+}
 </style>

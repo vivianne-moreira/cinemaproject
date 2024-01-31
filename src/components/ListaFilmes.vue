@@ -117,7 +117,7 @@ export default defineComponent({
 .filme-descricao {
   font-size: 1rem;
   margin-top: 5px;
-  color: #555;
+  color:#e3dbdb; 
 }
 
 .sala-list {
@@ -136,9 +136,10 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  color:#e3dbdb; 
 }
 
 .espaco-footer {
-  height: 30px;
+  height: 70px;
 }
 </style>

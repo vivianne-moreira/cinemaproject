@@ -8,8 +8,8 @@
       <!-- Renderiza os detalhes da sala diretamente aqui -->
       <div v-if="showDetails[sala.id]" class="detalhes-sala">
         <p>Descrição: {{ sala.descricao }}</p>
-        <h3>Filmes Disponíveis</h3>
-        <ul>
+        <h3 class="info">Filmes Disponíveis</h3>
+        <ul class="for">
           <li v-for="filme in sala.filmes" :key="filme.id">
             {{ filme.nome }} - {{ filme.diretor }} - Duração: {{ filme.duracao }} minutos
           </li>
@@ -99,17 +99,20 @@ export default defineComponent({
 .sala-list {
   margin-bottom: 20px;
   text-align: center;
+  color:#e3dbdb; 
 }
 
 .sala-list-title {
   font-size: 2rem;
   padding: 20px;
   margin-bottom: 10px;
+  color:#09b38b;
 }
 
 .sala-block {
   margin-bottom: 20px;
 }
+
 
 .sala-header {
   border: 1px solid #ddd;
@@ -117,20 +120,29 @@ export default defineComponent({
   padding: 15px;
   cursor: pointer;
 }
-
+.info {
+  color: #09b38b;
+  text-align: center;
+}
 .sala-header:hover {
-  background-color: #f0f0f0;
+  background-color: #09b38b;
 }
 
 .detalhes-sala {
   margin-top: 15px;
-  padding: 15px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #000000;
+  text-align: justify;
 }
 
 .espaço-em-branco {
   height: 150px;
 }
+.for{
+  text-align: center;
+
+}
+
 </style>

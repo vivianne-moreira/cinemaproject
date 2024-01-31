@@ -10,7 +10,7 @@
     
     <!-- Barra inferior com links de navegação -->
     <nav class="navigation">
-      <router-link to="/" class="nav-link">Home</router-link>
+      <router-link to="/" class="nav-link">Home Vue</router-link>
       <router-link to="/salas" class="nav-link">Salas Disponíveis</router-link>
       <router-link to="/filmes" class="nav-link">Filmes Disponíveis</router-link>
     </nav>
@@ -56,6 +56,7 @@ export default {
   display: flex;
   justify-content: center;
   padding: 10px;
+  text-align: center;
 }
 
 .nav-link {

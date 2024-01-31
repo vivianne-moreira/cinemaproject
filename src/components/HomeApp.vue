@@ -99,6 +99,13 @@ export default defineComponent({
   margin-bottom: 10px;
 }
 
+.info-string {
+  color:#e3dbdb; 
+}
+
+.info-description {
+  color:#e3dbdb; 
+}
 .home-app {
   display: flex;
   flex-direction: column;
