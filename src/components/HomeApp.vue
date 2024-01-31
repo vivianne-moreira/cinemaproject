@@ -1,27 +1,32 @@
+<!-- Conteúdo Home -->
 <template>
   <div class="home-app">
     <div class="welcome-section">
-      <h1>Seja Bem-Vindo ao Cinema Vue</h1>
+      <h1>Seja Bem-Vindo(a) ao Cinema Vue</h1>
       <p class="info-string">
         Descubra os melhores filmes em cartaz e aproveite a experiência única
         do nosso cinema. Cinema Vue, experiência única!
       </p>
     </div>
 
+    <!-- Conteúdo Destaques-->
     <div class="featured-section">
       <h2 class="h2">Destaques</h2>
       <b-carousel class="featured-carousel">
         <b-carousel-slide :key="0" class="carousel-slide">
-          <div class="filme-content">
-            <div v-for="filme in filmesMaisVistos" :key="filme.id" class="filme-item">
-              <img :src="require(`@/assets/imagemfilme/${filme.imagem}`)" alt="Imagem do Filme" class="filme-img-carousel" />
-              <h3>{{ filme.nome }}</h3>
+          <template #img>
+            <div class="movie-content">
+              <div v-for="movie in mostWatchedFilms" :key="movie.id" class="movie-item">
+                <img :src="movie.image" alt="Imagem do Filme" class="movie-image-carousel" />
+                <h3>{{ movie.name }}</h3>
+              </div>
             </div>
-          </div>
+          </template>
         </b-carousel-slide>
       </b-carousel>
     </div>
 
+    <!-- Conteúdo Mais Informações -->
     <div class="info-section">
       <h2>Mais Informações</h2>
       <p class="info-description">
@@ -31,15 +36,16 @@
       </p>
     </div>
 
+    <!-- Conteúdo Explore -->
     <div class="options-section">
       <h2 class="section-title">Explore</h2>
       <div class="explore-container"></div>
       <div>
-        <router-link to="/salas" class="explore-link">
+        <router-link to="/rooms" class="explore-link">
           <button class="explore-button">Ver Salas Disponíveis</button>
         </router-link>
       </div>
-      <router-link to="/filmes" class="explore-link">
+      <router-link to="/movies" class="explore-link">
         <button class="explore-button">Ver Filmes em Cartaz</button>
       </router-link>
     </div>
@@ -47,15 +53,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+import axios from 'axios';
+
+interface Movie {
+  id: number;
+  image: string;
+  name: string;
+}
 
 export default defineComponent({
-  data() {
+  setup() {
+    const mostWatchedFilms = ref<Movie[]>([]);
+
+    const carregarMostWatchedFilms = async () => {
+      try {
+        const response = await axios.get<Movie[]>('URL_DO_BACKEND/most-watched-films');
+        mostWatchedFilms.value = response.data;
+      } catch (error) {
+        console.error('Erro ao buscar filmes mais vistos:', error);
+      }
+    };
+
+    // Utilização do onMounted para fazer a requisição quando o componente é montado
+    onMounted(() => {
+      carregarMostWatchedFilms();
+    });
+
     return {
-      filmesMaisVistos: [
-        { id: 1, nome: 'It - A Coisa', imagem: 'filmeA.jpeg' },
-        { id: 2, nome: 'Carrie - A Estranha', imagem: 'filmeB.jpeg' },
-      ],
+      mostWatchedFilms,
     };
   },
 });
@@ -99,6 +125,13 @@ export default defineComponent({
   margin-bottom: 10px;
 }
 
+.info-string {
+  color:#e3dbdb; 
+}
+
+.info-description {
+  color:#e3dbdb; 
+}
 .home-app {
   display: flex;
   flex-direction: column;
@@ -111,6 +144,7 @@ export default defineComponent({
 .welcome-section,
 .featured-section,
 .info-section,
+
 .options-section {
   margin-bottom: 20px;
 }
@@ -157,6 +191,6 @@ h2 {
 .home-app::after {
   content: '';
   display: block;
-  height: 50px;
+  height: 20px;
 }
 </style>

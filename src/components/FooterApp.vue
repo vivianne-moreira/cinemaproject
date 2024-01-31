@@ -25,7 +25,7 @@
 
 .footer-content {
   width: 100%;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 </style>
